@@ -19,6 +19,16 @@ export function ToastContainer() {
 							initial={{ opacity: 0, y: 50, scale: 0.7 }}
 							animate={{ opacity: 1, y: 0, scale: 1 }}
 							exit={{ opacity: 0, scale: 0.7, transition: { duration: 0.3 } }}
+							drag="x"
+							dragSnapToOrigin={true}
+							dragConstraints={{ left: 0, right: 100 }}
+							onDragEnd={(_event, info) => {
+								const offset = info.offset.x;
+
+								if (offset >= 150) {
+									removeToast(toast.id);
+								}
+							}}
 							className="px-5 py-4 text-white bg-black border rounded-lg border-white/[0.07] relative group"
 						>
 							<div className="text-sm mb-0.5 font-medium">{toast.message}</div>
