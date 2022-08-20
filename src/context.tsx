@@ -10,6 +10,7 @@ import { Toast, ToastOptions } from "./types";
 interface ToastContext<T extends object = {}> {
 	toasts: Toast<T>[];
 	toast: (message: string, options: ToastOptions<T>) => Toast<T>;
+	removeToast: (toastId: string) => void;
 }
 
 const ToastContext = createContext<ToastContext | null>(null);
@@ -48,6 +49,9 @@ export function ToastProvider({ children }: ToastProviderProps) {
 				setToasts((toasts) => [...toasts, toast]);
 
 				return toast;
+			},
+			removeToast: (id) => {
+				setToasts((toasts) => toasts.filter((toast) => toast.id !== id));
 			},
 		}),
 		[toasts]

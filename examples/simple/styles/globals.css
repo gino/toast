@@ -1,7 +1,9 @@
+@import url('https://rsms.me/inter/inter.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply font-sans antialiased overflow-hidden;
+  @apply overflow-hidden font-sans antialiased text-white bg-black/95;
 }
