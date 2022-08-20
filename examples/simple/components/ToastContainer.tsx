@@ -21,14 +21,15 @@ export function ToastContainer() {
 							exit={{ opacity: 0, scale: 0.7, transition: { duration: 0.3 } }}
 							drag="x"
 							dragSnapToOrigin={true}
-							dragConstraints={{ left: 0, right: 100 }}
+							dragConstraints={{ left: 0, right: 10 }}
 							onDragEnd={(_event, info) => {
 								const offset = info.offset.x;
 
-								if (offset >= 150) {
+								if (offset >= 130) {
 									removeToast(toast.id);
 								}
 							}}
+							whileTap={{ scale: 0.95 }}
 							className="px-5 py-4 text-white bg-black border rounded-lg border-white/[0.07] relative group"
 						>
 							<div className="text-sm mb-0.5 font-medium">{toast.message}</div>
