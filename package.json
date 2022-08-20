@@ -1,0 +1,22 @@
+{
+	"name": "toast",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"build:types": "tsc --emitDeclarationOnly --outDir dist",
+		"build": "rimraf dist && node ./scripts/build.js && pnpm build:types"
+	},
+	"main": "dist/index.js",
+	"module": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/react": "^18.0.17",
+		"esbuild": "^0.15.5",
+		"react": "^18.2.0",
+		"rimraf": "^3.0.2",
+		"typescript": "^4.7.4"
+	}
+}
