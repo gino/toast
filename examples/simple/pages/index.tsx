@@ -5,13 +5,23 @@ interface ToastExtraProps {
 }
 
 export default function Index() {
-	const { toasts } = useToast<ToastExtraProps>();
+	const { toast, toasts } = useToast<ToastExtraProps>();
 
 	return (
-		<div>
-			<button>Add toast</button>
+		<div className="p-4">
+			<button
+				onClick={() => {
+					toast("test", {
+						props: {
+							date: new Date(),
+						},
+					});
+				}}
+			>
+				Add toast
+			</button>
 
-			<ul>
+			<ul className="list-disc list-inside">
 				{toasts.map((toast) => (
 					<li key={toast.id}>{JSON.stringify(toast, null, 2)}</li>
 				))}

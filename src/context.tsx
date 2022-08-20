@@ -1,13 +1,20 @@
-import { createContext, ReactElement, useContext } from "react";
-import { Toast } from "./types";
+import {
+	createContext,
+	ReactElement,
+	useContext,
+	useMemo,
+	useState,
+} from "react";
+import { Toast, ToastOptions } from "./types";
 
-interface ToastContext<T extends object = never> {
+interface ToastContext<T extends object = {}> {
 	toasts: Toast<T>[];
+	toast: (message: string, options: ToastOptions<T>) => Toast<T>;
 }
 
 const ToastContext = createContext<ToastContext>(null!);
 
-export function useToast<T extends object = never>(): ToastContext<T> {
+export function useToast<T extends object = {}>(): ToastContext<T> {
 	const context = useContext(ToastContext);
 
 	if (!context) {
@@ -16,7 +23,7 @@ export function useToast<T extends object = never>(): ToastContext<T> {
 		);
 	}
 
-	return context;
+	return context as ToastContext<any>;
 }
 
 interface ToastProviderProps {
@@ -24,8 +31,29 @@ interface ToastProviderProps {
 }
 
 export function ToastProvider({ children }: ToastProviderProps) {
+	const [toasts, setToasts] = useState<Toast[]>([]);
+
+	const memoizedValue = useMemo<ToastContext>(
+		() => ({
+			toasts,
+			toast: (message, options) => {
+				const id = Math.random().toString(36).substring(2);
+
+				const toast: Toast = {
+					id,
+					props: options.props ?? {},
+				};
+
+				setToasts((toasts) => [...toasts, toast]);
+
+				return toast;
+			},
+		}),
+		[toasts]
+	);
+
 	return (
-		<ToastContext.Provider value={{ toasts: [] }}>
+		<ToastContext.Provider value={memoizedValue}>
 			{children}
 		</ToastContext.Provider>
 	);
