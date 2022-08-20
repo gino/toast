@@ -1,17 +1,14 @@
 import { useToast } from "@gino/toast";
-
-interface ToastExtraProps {
-	date: Date;
-}
+import { ToastExtraProps } from "../components/ToastContainer";
 
 export default function Index() {
-	const { toast, toasts } = useToast<ToastExtraProps>();
+	const { toast } = useToast<ToastExtraProps>();
 
 	return (
 		<div className="p-4">
 			<button
 				onClick={() => {
-					toast("test", {
+					toast("Event created", {
 						props: {
 							date: new Date(),
 						},
@@ -20,12 +17,6 @@ export default function Index() {
 			>
 				Add toast
 			</button>
-
-			<ul className="list-disc list-inside">
-				{toasts.map((toast) => (
-					<li key={toast.id}>{JSON.stringify(toast, null, 2)}</li>
-				))}
-			</ul>
 		</div>
 	);
 }

@@ -12,7 +12,7 @@ interface ToastContext<T extends object = {}> {
 	toast: (message: string, options: ToastOptions<T>) => Toast<T>;
 }
 
-const ToastContext = createContext<ToastContext>(null!);
+const ToastContext = createContext<ToastContext | null>(null);
 
 export function useToast<T extends object = {}>(): ToastContext<T> {
 	const context = useContext(ToastContext);
@@ -41,6 +41,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
 
 				const toast: Toast = {
 					id,
+					message,
 					props: options.props ?? {},
 				};
 
