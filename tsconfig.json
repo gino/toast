@@ -1,13 +1,16 @@
 {
 	"compilerOptions": {
-		"declaration": true,
-		"target": "esnext",
-		"lib": ["esnext", "dom"],
-		"strict": true,
-		"noImplicitAny": false,
 		"esModuleInterop": true,
+		"strict": true,
+		"skipLibCheck": true,
+		"jsx": "react",
+		"module": "ESNext",
+		"declaration": true,
+		"declarationDir": "types",
+		"sourceMap": true,
+		"outDir": "dist",
 		"moduleResolution": "node",
-		"outDir": "dist"
+		"emitDeclarationOnly": true
 	},
 	"include": ["src/**/*.ts", "src/**/*.tsx"],
 	"exclude": ["node_modules"]
