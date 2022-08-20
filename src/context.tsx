@@ -1,13 +1,13 @@
 import { createContext, ReactElement, useContext } from "react";
 import { Toast } from "./types";
 
-interface ToastContext {
-	toasts: Toast[];
+interface ToastContext<T extends object = never> {
+	toasts: Toast<T>[];
 }
 
 const ToastContext = createContext<ToastContext>(null!);
 
-export function useToast() {
+export function useToast<T extends object = never>(): ToastContext<T> {
 	const context = useContext(ToastContext);
 
 	if (!context) {

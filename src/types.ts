@@ -1,3 +1,4 @@
-export interface Toast {
+export interface Toast<T extends object> {
 	id: string;
+	props: T;
 }
