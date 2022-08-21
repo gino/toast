@@ -39,7 +39,7 @@ npm install @gino/toast
 
 ### Rendering toasts
 
-In order to render toasts, we made this library as flexibile as possible. You can simply map over the `toasts` array that is exported by the `useToasts` hook.
+We have made this library as flexibile as possible. In order to render toasts, you can simply map over the `toasts` array that is exported by the `useToasts` hook.
 
 ```tsx
 const { toasts, removeToast } = useToast();
