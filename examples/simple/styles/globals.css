@@ -5,5 +5,5 @@
 @tailwind utilities;
 
 body {
-  @apply overflow-hidden font-sans antialiased text-white bg-black/95;
+  @apply overflow-hidden font-sans antialiased;
 }
