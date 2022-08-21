@@ -20,10 +20,11 @@ export function ToastContainer() {
 				{toasts.map((toast, index, array) => (
 					<div
 						key={toast.id}
-						className="absolute bottom-0 right-0 w-[400px] transition-transform duration-500 ease-in-out before:absolute before:inset-x-[-14px] before:top-[-13px] before:bottom-0"
+						className="absolute bottom-0 right-0 w-[400px] transition-transform duration-500 ease-in-out before:absolute before:inset-x-[var(--gap)] before:top-[var(--gap)] before:bottom-0"
 						style={
 							{
 								"--index": array.length - index,
+								"--gap": "-14px",
 								transform: hovering
 									? "translateY(calc((var(--index) - 1) * -85px))"
 									: "translateY(calc((var(--index) - 1) * -15px)) scale(calc(-1 * (var(--index) - 1) * 0.05 + 1))",
@@ -51,9 +52,7 @@ function Toast({ toast }: { toast: IToast<ToastExtraProps> }) {
 			transition={{ duration: 0.4, ease: "easeInOut" }}
 			className="relative px-5 py-4 text-white bg-black border rounded-lg shadow shadow-black/30 border-white/10 group"
 		>
-			<div className="text-sm mb-0.5 font-medium">
-				{toast.message} {toast.id}
-			</div>
+			<div className="text-sm mb-0.5 font-medium">{toast.message}</div>
 			<div className="text-xs text-white/50">
 				{toast.props.date.toLocaleDateString("en-us", {
 					weekday: "long",
