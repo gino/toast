@@ -22,6 +22,8 @@ npm install @gino/toast
 1. You must wrap your App component with our `ToastProvider` to access the required context.
 
 ```tsx
+import { ToastProvider } from "@gino/toast"
+
 <ToastProvider>
   <Component {...pageProps} />
 </ToastProvider>
@@ -30,6 +32,8 @@ npm install @gino/toast
 2. To create a toast, simply use the `toast` function exported from the `useToast` hook.
 
 ```tsx
+const { toast } = useToast();
+
 <button
   onClick={() => {
     toast("This is my toast");
