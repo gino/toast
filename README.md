@@ -56,4 +56,4 @@ return (
 )
 ```
 
-> This library is a headless toast library that does not include any styling or animations. You are free to add those yourself or copy an [example](/tree/master/examples/) of how it could be used.
+> This library is a headless toast library that does not include any styling or animations. You are free to add those yourself or copy an [example](/examples/) of how it could be used.
