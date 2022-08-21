@@ -17,7 +17,7 @@ npm install @gino/toast
 
 ## Basic usage
 
-1. You must wrap your App component with our `ToastProvider` in order to access the required context.
+1. You must wrap your App component with our `ToastProvider` to access the required context.
 
 ```tsx
 <ToastProvider>
@@ -25,7 +25,7 @@ npm install @gino/toast
 </ToastProvider>
 ```
 
-2. In order to create a toast, simply use the `toast` function exported from the `useToast` hook.
+2. To create a toast, simply use the `toast` function exported from the `useToast` hook.
 
 ```tsx
 <button
