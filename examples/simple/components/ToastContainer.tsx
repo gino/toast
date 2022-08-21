@@ -45,7 +45,9 @@ function Toast({ toast }: { toast: IToast<ToastExtraProps> }) {
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="px-5 py-4 text-white bg-black rounded-lg relative group border border-white/10"
     >
-      <div className="text-sm mb-0.5 font-medium">{toast.message}</div>
+      <div className="text-sm mb-0.5 font-medium">
+        {toast.message} {toast.id}
+      </div>
       <div className="text-xs text-white/50">
         {toast.props.date.toLocaleDateString("en-us", {
           weekday: "long",
