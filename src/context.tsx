@@ -1,5 +1,5 @@
 import { createContext, ReactElement, useContext, useMemo } from "react";
-import { Toast, ToastOptions } from "./types";
+import { Toast, ToastOptions, ToastProviderOptions } from "./types";
 import { useQueue } from "./utils";
 
 interface ToastContext<T extends object = {}> {
@@ -24,10 +24,11 @@ export function useToast<T extends object = {}>(): ToastContext<T> {
 
 interface ToastProviderProps {
   children: ReactElement | ReactElement[];
+  options?: ToastProviderOptions;
 }
 
-export function ToastProvider({ children }: ToastProviderProps) {
-  const limit = 3; // TODO: Make this a changeable option
+export function ToastProvider({ children, options }: ToastProviderProps) {
+  const limit = options?.limit ?? 3;
   const {
     state: toasts,
     update,

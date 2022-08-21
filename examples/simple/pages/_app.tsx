@@ -5,15 +5,15 @@ import { ToastContainer } from "../components/ToastContainer";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-	return (
-		<ToastProvider>
-			<Component {...pageProps} />
+  return (
+    <ToastProvider options={{ limit: 5 }}>
+      <Component {...pageProps} />
 
-			<Portal>
-				<ToastContainer />
-			</Portal>
-		</ToastProvider>
-	);
+      <Portal>
+        <ToastContainer />
+      </Portal>
+    </ToastProvider>
+  );
 }
 
 export default MyApp;
