@@ -1,6 +1,6 @@
 import { Toast as IToast, useToast } from "@gino/toast";
 import { AnimatePresence, motion } from "framer-motion";
-import { CSSProperties } from "react";
+import { CSSProperties, useState } from "react";
 
 export interface ToastExtraProps {
 	date: Date;
@@ -9,23 +9,33 @@ export interface ToastExtraProps {
 export function ToastContainer() {
 	const { toasts } = useToast<ToastExtraProps>();
 
+	const [hovering, setHovering] = useState(false);
+
 	return (
-		<AnimatePresence>
-			{toasts.map((toast, index, array) => (
-				<div
-					key={toast.id}
-					className="absolute w-full max-w-md right-4 bottom-4"
-					style={
-						{
-							transform: `translateY(calc(var(--index) * -15px)) scale(calc(-1 * var(--index) * 0.05 + 1))`,
-							"--index": array.length - index,
-						} as CSSProperties
-					}
-				>
-					<Toast toast={toast} />
-				</div>
-			))}
-		</AnimatePresence>
+		<div
+			className="fixed bottom-4 right-4"
+			onMouseLeave={() => setHovering(false)}
+		>
+			<AnimatePresence>
+				{toasts.map((toast, index, array) => (
+					<div
+						key={toast.id}
+						className="absolute bottom-0 right-0 w-[400px] transition-transform duration-500 ease-in-out before:absolute before:inset-x-[-14px] before:top-[-13px] before:bottom-0"
+						style={
+							{
+								"--index": array.length - index,
+								transform: hovering
+									? "translateY(calc((var(--index) - 1) * -85px))"
+									: "translateY(calc((var(--index) - 1) * -15px)) scale(calc(-1 * (var(--index) - 1) * 0.05 + 1))",
+							} as CSSProperties
+						}
+						onMouseEnter={() => setHovering(true)}
+					>
+						<Toast toast={toast} />
+					</div>
+				))}
+			</AnimatePresence>
+		</div>
 	);
 }
 
@@ -35,11 +45,11 @@ function Toast({ toast }: { toast: IToast<ToastExtraProps> }) {
 	return (
 		<motion.div
 			layout
-			animate={{ opacity: 1, translateY: 0 }}
-			exit={{ opacity: 0, translateY: 30 }}
-			initial={{ opacity: 0, translateY: 30 }}
-			transition={{ duration: 0.3, ease: "easeInOut" }}
-			className="relative px-5 py-4 text-white bg-black border rounded-lg shadow shadow-black/30 group border-white/10"
+			animate={{ opacity: 1, scale: 1, translateY: 0 }}
+			exit={{ opacity: 0, scale: 0.8, translateY: 20 }}
+			initial={{ opacity: 0, scale: 1, translateY: 20 }}
+			transition={{ duration: 0.4, ease: "easeInOut" }}
+			className="relative px-5 py-4 text-white bg-black border rounded-lg shadow shadow-black/30 border-white/10 group"
 		>
 			<div className="text-sm mb-0.5 font-medium">
 				{toast.message} {toast.id}
@@ -56,7 +66,9 @@ function Toast({ toast }: { toast: IToast<ToastExtraProps> }) {
 
 			<div className="absolute transition duration-150 ease-in-out opacity-0 -top-2 -left-2 group-hover:opacity-100">
 				<button
-					onClick={() => removeToast(toast.id)}
+					onClick={() => {
+						removeToast(toast.id);
+					}}
 					className="flex items-center justify-center w-5 h-5 text-xs bg-black border-white/[0.07] border text-white/50 hover:text-white/100 rounded-full transition duration-150 ease-in-out focus:outline-none"
 					aria-label="Dismiss toast"
 					title="Dismiss toast"
