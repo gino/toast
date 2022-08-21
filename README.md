@@ -1,10 +1,12 @@
-# toast
-🍞 A lightweight easy-to-use toast library
+# toast 🍞
 
 ![Version](https://img.shields.io/github/package-json/v/gino/toast)
 ![Top language](https://img.shields.io/github/languages/top/gino/toast)
+![Stars](https://img.shields.io/github/stars/gino/toast?style=plastic)
 ![Contributors](https://img.shields.io/github/contributors/gino/toast)
 ![License](https://img.shields.io/github/license/gino/toast)
+
+A lightweight easy-to-use toast library
 
 ## Installation
 
