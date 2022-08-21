@@ -1,3 +1,20 @@
+# toast
+🍞 A lightweight easy-to-use toast library
+
+![Version](https://img.shields.io/github/package-json/v/gino/toast)
+![Top language](https://img.shields.io/github/languages/top/gino/toast)
+![Contributors](https://img.shields.io/github/contributors/gino/toast)
+![License](https://img.shields.io/github/license/gino/toast)
+
+## Installation
+
+```
+yarn add @gino/toast
+```
+```
+npm install @gino/toast
+```
+
 ## Basic usage
 
 1. You must wrap your App component with our `ToastProvider` in order to access the required context.
