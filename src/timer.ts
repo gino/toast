@@ -14,6 +14,7 @@ export function useToastTimer<T extends HTMLElement = any>(
   const duration = options?.duration ?? 3;
   const pauseOnHover =
     options?.pauseOnHover === undefined ? true : options?.pauseOnHover;
+  const sticky = options?.sticky === undefined ? false : options?.sticky;
 
   useEffect(() => {
     if (!ref || !pauseOnHover) return;
@@ -32,13 +33,13 @@ export function useToastTimer<T extends HTMLElement = any>(
   }, [ref, pauseOnHover]);
 
   useEffect(() => {
-    if (!ref || isPaused) return;
+    if (!ref || isPaused || sticky) return;
     const timeout = setTimeout(() => {
       removeToast(toastId);
     }, duration * 1000);
 
     return () => clearTimeout(timeout);
-  }, [ref, isPaused]);
+  }, [ref, isPaused, sticky]);
 
   return ref;
 }

@@ -24,35 +24,45 @@ export function ToastContainer() {
       onMouseLeave={() => setHovering(false)}
     >
       <AnimatePresence>
-        {toasts.map((toast, index, array) => (
-          <div
-            key={toast.id}
-            className="absolute bottom-0 right-0 w-[400px] transition-transform duration-500 ease-in-out before:absolute before:inset-x-[var(--gap)] before:top-[var(--gap)] before:bottom-0"
-            style={
-              {
-                "--index": array.length - index,
-                "--gap": "-14px",
-                transform: hovering
-                  ? "translateY(calc((var(--index) - 1) * -85px))"
-                  : "translateY(calc((var(--index) - 1) * -15px)) scale(calc(-1 * (var(--index) - 1) * 0.05 + 1))",
-              } as CSSProperties
-            }
-            onMouseEnter={() => setHovering(true)}
-          >
-            <ToastComponent toast={toast} />
-          </div>
-        ))}
+        {toasts.map((toast, index, array) => {
+          const reversedIndex = array.length - index;
+          return (
+            <div
+              key={toast.id}
+              className="absolute bottom-0 right-0 w-[400px] transition-transform duration-500 ease-in-out before:absolute before:inset-x-[var(--gap)] before:top-[var(--gap)] before:bottom-0"
+              style={
+                {
+                  "--index": reversedIndex,
+                  "--gap": "-14px",
+                  transform: hovering
+                    ? "translateY(calc((var(--index) - 1) * -85px))"
+                    : "translateY(calc((var(--index) - 1) * -15px)) scale(calc(-1 * (var(--index) - 1) * 0.05 + 1))",
+                } as CSSProperties
+              }
+              onMouseEnter={() => setHovering(true)}
+            >
+              <ToastComponent toast={toast} sticky={reversedIndex === 1} />
+            </div>
+          );
+        })}
       </AnimatePresence>
     </div>
   );
 }
 
-function ToastComponent({ toast }: { toast: IToast<ToastExtraProps> }) {
+function ToastComponent({
+  toast,
+  sticky,
+}: {
+  toast: IToast<ToastExtraProps>;
+  sticky: boolean;
+}) {
   const { removeToast } = useToast<ToastExtraProps>();
 
   const ref = useToastTimer<HTMLDivElement>(toast.id, {
     duration: 3,
     pauseOnHover: true,
+    sticky,
   });
 
   return (
@@ -75,6 +85,24 @@ function ToastComponent({ toast }: { toast: IToast<ToastExtraProps> }) {
         }
       }}
     >
+      {sticky && (
+        <div className="absolute top-2 right-3 text-[8px] font-semibold px-2 py-1 rounded bg-red-500/20 flex items-center space-x-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-2 w-2"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <span>Sticky</span>
+        </div>
+      )}
+
       <div className="text-sm mb-0.5 font-medium">
         {toast.message} {toast.id}
       </div>
