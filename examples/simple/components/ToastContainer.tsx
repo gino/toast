@@ -4,6 +4,7 @@ import { CSSProperties, useEffect, useState } from "react";
 
 export interface ToastExtraProps {
   date: Date;
+  sticky: boolean;
 }
 
 export function ToastContainer() {
@@ -41,7 +42,7 @@ export function ToastContainer() {
               }
               onMouseEnter={() => setHovering(true)}
             >
-              <ToastComponent toast={toast} sticky={reversedIndex === 1} />
+              <ToastComponent toast={toast} />
             </div>
           );
         })}
@@ -50,19 +51,13 @@ export function ToastContainer() {
   );
 }
 
-function ToastComponent({
-  toast,
-  sticky,
-}: {
-  toast: IToast<ToastExtraProps>;
-  sticky: boolean;
-}) {
+function ToastComponent({ toast }: { toast: IToast<ToastExtraProps> }) {
   const { removeToast } = useToast<ToastExtraProps>();
 
   const ref = useToastTimer<HTMLDivElement>(toast.id, {
     duration: 3,
     pauseOnHover: true,
-    sticky,
+    sticky: toast.props.sticky,
   });
 
   return (
@@ -85,8 +80,8 @@ function ToastComponent({
         }
       }}
     >
-      {sticky && (
-        <div className="absolute top-2 right-3 text-[8px] font-semibold px-2 py-1 rounded bg-red-500/20 flex items-center space-x-1">
+      {toast.props.sticky && (
+        <div className="absolute top-2 right-3 text-[8px] font-semibold px-2 py-1 rounded bg-white/10 flex items-center space-x-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-2 w-2"
