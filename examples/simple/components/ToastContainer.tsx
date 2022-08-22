@@ -1,4 +1,4 @@
-import { Toast as IToast, useToast } from "@gino/toast";
+import { Toast as IToast, useToast, useToastTimer } from "@gino/toast";
 import { AnimatePresence, motion } from "framer-motion";
 import { CSSProperties, useEffect, useState } from "react";
 
@@ -39,7 +39,7 @@ export function ToastContainer() {
             }
             onMouseEnter={() => setHovering(true)}
           >
-            <Toast toast={toast} />
+            <ToastComponent toast={toast} />
           </div>
         ))}
       </AnimatePresence>
@@ -47,11 +47,17 @@ export function ToastContainer() {
   );
 }
 
-function Toast({ toast }: { toast: IToast<ToastExtraProps> }) {
+function ToastComponent({ toast }: { toast: IToast<ToastExtraProps> }) {
   const { removeToast } = useToast<ToastExtraProps>();
+
+  const ref = useToastTimer<HTMLDivElement>(toast.id, {
+    duration: 3,
+    pauseOnHover: true,
+  });
 
   return (
     <motion.div
+      ref={ref}
       layout
       animate={{ opacity: 1, scale: 1, translateY: 0 }}
       exit={{ opacity: 0, scale: 0.8, translateY: 20 }}
@@ -69,7 +75,9 @@ function Toast({ toast }: { toast: IToast<ToastExtraProps> }) {
         }
       }}
     >
-      <div className="text-sm mb-0.5 font-medium">{toast.message}</div>
+      <div className="text-sm mb-0.5 font-medium">
+        {toast.message} {toast.id}
+      </div>
       <div className="text-xs text-white/50">
         {toast.props.date.toLocaleDateString("en-us", {
           weekday: "long",

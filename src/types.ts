@@ -5,14 +5,6 @@ export interface Toast<T extends object = {}> {
 }
 
 export interface ToastOptions<T extends object = {}> {
-  /**
-   * Amount of seconds a toast should stay visible before disappearing.
-   * If `null` provided, toast will stay permanently.
-   *
-   * @default 1
-   */
-  duration?: number | null;
-
   props?: T;
 }
 
@@ -29,4 +21,25 @@ export interface ToastProviderOptions {
    * @default false
    */
   removeFirstOnLimit?: boolean;
+}
+
+export interface ToastTimerOptions {
+  /**
+   * Amount of seconds a toast should stay visible before disappearing.
+   *
+   * @default 3
+   */
+  duration?: number;
+  /**
+   * Pauses the toast timer whenever the user is hovering your toast.
+   *
+   * @default true
+   */
+  pauseOnHover?: boolean;
+  /**
+   * Makes the toast sticky, meaning that the toast will not disappear after a certain amount of seconds.
+   *
+   * @default false
+   */
+  sticky?: boolean;
 }

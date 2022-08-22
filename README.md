@@ -62,4 +62,23 @@ return (
 )
 ```
 
+### Making toasts disappear after a certain time
+
+To make toasts disappear after a certain amount of time, we have created a `useToastTimer` hook that easily handles all this functionality for you.
+
+```tsx
+import { useToastTimer } from "@gino/toast"
+
+const ref = useToastTimer<HTMLDivElement>(toast.id, {
+  duration: 3,
+  pauseOnHover: true,
+});
+
+return (
+  <div ref={ref}>
+    <div>This toast will disappear after 3 seconds unless I'm being hovered</div>
+  </div>
+)
+```
+
 > This library is a headless toast library that does not include any styling or animations. You are free to add those yourself or copy an [example](/examples/) of how it could be used.

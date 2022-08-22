@@ -1,4 +1,4 @@
-import { createContext, ReactElement, useContext, useMemo } from "react";
+import React, { createContext, ReactElement, useContext, useMemo } from "react";
 import { Toast, ToastOptions, ToastProviderOptions } from "./types";
 import { useQueue } from "./utils";
 
