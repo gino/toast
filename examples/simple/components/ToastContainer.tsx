@@ -1,7 +1,7 @@
 import { Toast as IToast, useToast, useToastTimer } from "@gino/toast";
 
 export function ToastContainer() {
-  const { toasts, removeToast } = useToast();
+  const { toasts } = useToast();
 
   return (
     <ul className="absolute bottom-8 right-8 flex flex-col gap-4 max-w-md w-full">
