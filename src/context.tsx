@@ -4,7 +4,7 @@ import { useQueue } from "./utils";
 
 interface ToastContext<T extends object = {}> {
   toasts: Toast<T>[];
-  toast: (message: string, options: ToastOptions<T>) => Toast<T>;
+  toast: (message: string, options?: ToastOptions<T>) => Toast<T>;
   removeToast: (toastId: string) => void;
 }
 
@@ -55,7 +55,7 @@ export function ToastProvider({ children, options }: ToastProviderProps) {
         const toast: Toast = {
           id,
           message,
-          props: options.props ?? {},
+          props: options?.props ?? {},
         };
 
         if (removeFirstOnLimit && toasts.length === limit) {

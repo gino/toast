@@ -1,12 +1,12 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
 import { ToastProvider } from "@gino/toast";
-import { ToastContainer } from "../components/ToastContainer";
+import type { AppProps } from "next/app";
 import { Portal } from "../components/Portal";
+import { ToastContainer } from "../components/ToastContainer";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ToastProvider options={{ removeFirstOnLimit: true, limit: 10 }}>
+    <ToastProvider options={{ limit: 5 }}>
       <Component {...pageProps} />
 
       <Portal>
