@@ -12,7 +12,7 @@ export function ToastContainer() {
   const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
-    // If all toasts are removed while hovering, the hover should be manually disabled
+    // If all toasts are removed while in hovering state, the hover should be manually disabled
     if (hovering && !toasts.length) {
       setHovering(false);
     }
