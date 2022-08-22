@@ -64,7 +64,7 @@ return (
 
 ### Making toasts disappear after a certain time
 
-To make toasts disappear after a certain amount of time, we have created a `useToastTimer` hook that easily handles all this functionality for you.
+To make toasts disappear after a certain amount of time, we have created a `useToastTimer` hook that easily handles all this functionality for you. To see this feature in action, please refer to our [example project](/examples/simple/components/ToastContainer.tsx#L50).
 
 ```tsx
 import { useToastTimer } from "@gino/toast"
