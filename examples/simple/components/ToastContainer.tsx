@@ -1,6 +1,6 @@
 import { Toast as IToast, useToast } from "@gino/toast";
 import { AnimatePresence, motion } from "framer-motion";
-import { CSSProperties, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 
 export interface ToastExtraProps {
   date: Date;
@@ -10,6 +10,13 @@ export function ToastContainer() {
   const { toasts } = useToast<ToastExtraProps>();
 
   const [hovering, setHovering] = useState(false);
+
+  useEffect(() => {
+    // If all toasts are removed while hovering, the hover should be manually disabled
+    if (hovering && !toasts.length) {
+      setHovering(false);
+    }
+  }, [toasts]);
 
   return (
     <div
