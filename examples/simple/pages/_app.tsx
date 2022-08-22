@@ -6,7 +6,7 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ToastProvider options={{ limit: 5 }}>
+    <ToastProvider options={{ limit: 5, removeFirstOnLimit: true }}>
       <Component {...pageProps} />
 
       <Portal>

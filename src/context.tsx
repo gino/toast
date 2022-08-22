@@ -29,6 +29,11 @@ interface ToastProviderProps {
 
 export function ToastProvider({ children, options }: ToastProviderProps) {
   const limit = options?.limit ?? 3;
+  const removeFirstOnLimit =
+    options?.removeFirstOnLimit === undefined
+      ? false
+      : options?.removeFirstOnLimit;
+
   const {
     state: toasts,
     update,
@@ -53,8 +58,7 @@ export function ToastProvider({ children, options }: ToastProviderProps) {
           props: options.props ?? {},
         };
 
-        // TODO: Make this a changeable option
-        if (toasts.length === limit) {
+        if (removeFirstOnLimit && toasts.length === limit) {
           removeToast(toasts[0].id);
         }
 

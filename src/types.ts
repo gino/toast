@@ -23,4 +23,10 @@ export interface ToastProviderOptions {
    * @default 3
    */
   limit?: number;
+  /**
+   * If the limit has been reached, the first toast will be removed whenever a new one gets added.
+   *
+   * @default false
+   */
+  removeFirstOnLimit?: boolean;
 }
